@@ -218,37 +218,6 @@
             color: var(--text);
         }
 
-        /* Proficiency Bars */
-        .proficiency {
-            margin-top: 2rem;
-        }
-
-        .proficiency-bar {
-            margin-bottom: 1rem;
-        }
-
-        .proficiency-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .proficiency-track {
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .proficiency-fill {
-            height: 100%;
-            background: var(--text);
-            border-radius: 4px;
-            width: 0;
-            transition: width 1.5s ease-out;
-        }
-
         /* Experience Section */
         .experience-item {
             background: var(--dark-light);
@@ -481,45 +450,6 @@
                 </ul>
             </div>
         </div>
-
-        <div class="proficiency fade-in">
-            <div class="proficiency-bar">
-                <div class="proficiency-label">
-                    <span>ReactJS</span>
-                    <span>6+ years (Advanced)</span>
-                </div>
-                <div class="proficiency-track">
-                    <div class="proficiency-fill" data-width="90"></div>
-                </div>
-            </div>
-            <div class="proficiency-bar">
-                <div class="proficiency-label">
-                    <span>NodeJS / NestJS</span>
-                    <span>4-6 years (Intermediate)</span>
-                </div>
-                <div class="proficiency-track">
-                    <div class="proficiency-fill" data-width="70"></div>
-                </div>
-            </div>
-            <div class="proficiency-bar">
-                <div class="proficiency-label">
-                    <span>Angular / AngularJS</span>
-                    <span>4+ years (Intermediate)</span>
-                </div>
-                <div class="proficiency-track">
-                    <div class="proficiency-fill" data-width="65"></div>
-                </div>
-            </div>
-            <div class="proficiency-bar">
-                <div class="proficiency-label">
-                    <span>PHP</span>
-                    <span>6+ years (Advanced)</span>
-                </div>
-                <div class="proficiency-track">
-                    <div class="proficiency-fill" data-width="85"></div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Experience Section -->
@@ -687,7 +617,6 @@
         // Scroll animations
         function handleScrollAnimations() {
             const elements = document.querySelectorAll('.fade-in');
-            const proficiencyBars = document.querySelectorAll('.proficiency-fill');
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -698,18 +627,6 @@
             }, { threshold: 0.1 });
 
             elements.forEach(el => observer.observe(el));
-
-            // Animate proficiency bars
-            const proficiencyObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const width = entry.target.dataset.width;
-                        entry.target.style.width = width + '%';
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            proficiencyBars.forEach(bar => proficiencyObserver.observe(bar));
         }
 
         // Smooth scroll for navigation
