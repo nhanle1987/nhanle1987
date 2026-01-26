@@ -15,14 +15,15 @@
         }
 
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #8b5cf6;
-            --dark: #0f172a;
-            --dark-light: #1e293b;
-            --text: #f1f5f9;
-            --text-muted: #94a3b8;
-            --accent: #22d3ee;
+            --primary: #333;
+            --primary-dark: #000;
+            --secondary: #555;
+            --dark: #ffffff;
+            --dark-light: #f5f5f5;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --accent: #333;
+            --border: #e0e0e0;
         }
 
         html {
@@ -37,44 +38,7 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .bg-animation .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float 15s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1);
-                opacity: 0;
-            }
-        }
-
+        /* Background */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -82,36 +46,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(135deg, var(--dark) 0%, #1a1a2e 50%, var(--dark) 100%);
-        }
-
-        .bg-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            filter: blur(150px);
-            opacity: 0.15;
-            z-index: -1;
-            animation: glow 10s ease-in-out infinite;
-        }
-
-        .bg-glow-1 {
-            top: -200px;
-            left: -200px;
-            background: var(--primary);
-        }
-
-        .bg-glow-2 {
-            bottom: -200px;
-            right: -200px;
-            background: var(--secondary);
-            animation-delay: -5s;
-        }
-
-        @keyframes glow {
-            0%, 100% { transform: scale(1); opacity: 0.15; }
-            50% { transform: scale(1.2); opacity: 0.2; }
+            background: var(--dark);
         }
 
         /* Header */
@@ -125,18 +60,14 @@
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            background: rgba(15, 23, 42, 0.8);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid var(--border);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text);
         }
 
         nav a {
@@ -148,7 +79,7 @@
         }
 
         nav a:hover {
-            color: var(--accent);
+            color: var(--text);
         }
 
         /* Hero Section */
@@ -169,50 +100,32 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--text);
+            color: var(--dark);
             margin: 0 auto 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
             font-weight: 700;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
-            50% { box-shadow: 0 0 0 20px rgba(99, 102, 241, 0); }
         }
 
         .hero h1 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            animation: fadeInUp 0.8s ease-out;
+            color: var(--text);
         }
 
         .hero .title {
             font-size: 1.5rem;
-            color: var(--accent);
+            color: var(--text-muted);
             margin-bottom: 1rem;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
 
         .typing-text {
             color: var(--text-muted);
             font-size: 1.1rem;
-            min-height: 1.5em;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .typing-text::after {
-            content: '|';
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
         }
 
         .hero-info {
@@ -221,7 +134,6 @@
             justify-content: center;
             gap: 1.5rem;
             margin-top: 2rem;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
 
         .hero-info span {
@@ -261,7 +173,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background: var(--text);
             border-radius: 2px;
         }
 
@@ -276,20 +188,19 @@
             background: var(--dark-light);
             border-radius: 12px;
             padding: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .skill-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
-            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .skill-card h3 {
             font-size: 1.1rem;
             margin-bottom: 1rem;
-            color: var(--accent);
+            color: var(--text);
         }
 
         .skill-card ul {
@@ -304,7 +215,7 @@
 
         .skill-card li::before {
             content: '▹ ';
-            color: var(--primary);
+            color: var(--text);
         }
 
         /* Proficiency Bars */
@@ -325,14 +236,14 @@
 
         .proficiency-track {
             height: 8px;
-            background: rgba(255,255,255,0.1);
+            background: #e0e0e0;
             border-radius: 4px;
             overflow: hidden;
         }
 
         .proficiency-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background: var(--text);
             border-radius: 4px;
             width: 0;
             transition: width 1.5s ease-out;
@@ -344,12 +255,12 @@
             border-radius: 12px;
             padding: 2rem;
             margin-bottom: 1.5rem;
-            border-left: 3px solid var(--primary);
+            border-left: 3px solid var(--text);
             transition: transform 0.3s;
         }
 
         .experience-item:hover {
-            transform: translateX(10px);
+            transform: translateX(5px);
         }
 
         .experience-header {
@@ -363,10 +274,11 @@
         .experience-company {
             font-size: 1.3rem;
             font-weight: 600;
+            color: var(--text);
         }
 
         .experience-role {
-            color: var(--accent);
+            color: var(--text-muted);
             font-size: 0.95rem;
             margin-top: 0.3rem;
         }
@@ -383,8 +295,9 @@
         .project {
             margin-top: 1rem;
             padding: 1rem;
-            background: rgba(255,255,255,0.03);
+            background: #fff;
             border-radius: 8px;
+            border: 1px solid var(--border);
         }
 
         .project-name {
@@ -404,12 +317,13 @@
             border-radius: 12px;
             padding: 2rem;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
         }
 
         .education-card h3 {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
+            color: var(--text);
         }
 
         .education-card p {
@@ -431,7 +345,7 @@
 
         .contact-btn {
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--text);
             color: white;
             text-decoration: none;
             border-radius: 50px;
@@ -441,7 +355,7 @@
 
         .contact-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         /* Footer */
@@ -450,7 +364,8 @@
             padding: 2rem;
             color: var(--text-muted);
             font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid var(--border);
+            background: var(--dark-light);
         }
 
         /* Animations */
@@ -467,8 +382,8 @@
 
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
         .fade-in.visible {
@@ -499,9 +414,6 @@
 <body>
     <!-- Background -->
     <div class="bg-gradient"></div>
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-    <div class="bg-animation" id="particles"></div>
 
     <!-- Header -->
     <header>
@@ -521,7 +433,7 @@
             <div class="avatar">LN</div>
             <h1>Le Trong Nhan</h1>
             <p class="title">Senior Frontend Developer</p>
-            <p class="typing-text" id="typing"></p>
+            <p class="typing-text">With 14+ years of experience, I combine technical expertise with UI/UX understanding to deliver sustainable value.</p>
             <div class="hero-info">
                 <span>📍 District 12, Ho Chi Minh City</span>
                 <span>📞 09451 35453</span>
@@ -772,38 +684,6 @@
     </footer>
 
     <script>
-        // Create floating particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 30;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                container.appendChild(particle);
-            }
-        }
-
-        // Typing effect
-        function typeWriter() {
-            const text = "With 14+ years of experience, I combine technical expertise with UI/UX understanding to deliver sustainable value.";
-            const element = document.getElementById('typing');
-            let i = 0;
-
-            function type() {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, 40);
-                }
-            }
-
-            setTimeout(type, 1000);
-        }
-
         // Scroll animations
         function handleScrollAnimations() {
             const elements = document.querySelectorAll('.fade-in');
@@ -845,8 +725,6 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            typeWriter();
             handleScrollAnimations();
         });
     </script>
