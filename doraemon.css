@@ -1,0 +1,87 @@
+:root {
+  --dora-w: 36px;
+  --dora-h: 41px;
+}
+
+.dora-runner {
+  position: fixed;
+  width: var(--dora-w);
+  height: var(--dora-h);
+  background-image: url("dora.png");
+  background-repeat: no-repeat;
+  transform: scale(1);
+  image-rendering: pixelated;
+  z-index: 1000;
+  pointer-events: none;
+  bottom: 0;
+  left: -50px;
+}
+
+/* --- Sprite Animations --- */
+@keyframes walk-left {
+  0% { background-position: 0 0; }
+  100% { background-position: calc(4 * -1 * var(--dora-w)) 0; }
+}
+
+@keyframes fly-left {
+  0% { background-position: 0 calc(1 * -1 * var(--dora-h)); }
+  100% { background-position: calc(4 * -1 * var(--dora-w)) calc(1 * -1 * var(--dora-h)); }
+}
+
+@keyframes run-left {
+  0% { background-position: 0 calc(2 * -1 * var(--dora-h)); }
+  100% { background-position: calc(4 * -1 * var(--dora-w)) calc(2 * -1 * var(--dora-h)); }
+}
+
+@keyframes crawl-left {
+  0% { background-position: 0 calc(3 * -1 * var(--dora-h)); }
+  100% { background-position: calc(3 * -1 * var(--dora-w)) calc(3 * -1 * var(--dora-h)); }
+}
+
+@keyframes scared-left {
+  0% { background-position: 0 calc(5 * -1 * var(--dora-h)); }
+  100% { background-position: calc(4 * -1 * var(--dora-w)) calc(5 * -1 * var(--dora-h)); }
+}
+
+@keyframes back-view {
+  0% { background-position: 0 calc(7 * -1 * var(--dora-h)); }
+  100% { background-position: calc(3 * -1 * var(--dora-w)) calc(7 * -1 * var(--dora-h)); }
+}
+
+@keyframes walk-right {
+  0% { background-position: calc(5 * -1 * var(--dora-w)) 0; }
+  100% { background-position: calc(8 * -1 * var(--dora-w)) 0; }
+}
+
+@keyframes idle-right {
+  0% { background-position: calc(5 * -1 * var(--dora-w)) calc(1 * -1 * var(--dora-h)); }
+  100% { background-position: calc(7 * -1 * var(--dora-w)) calc(1 * -1 * var(--dora-h)); }
+}
+
+@keyframes run-right {
+  0% { background-position: calc(5 * -1 * var(--dora-w)) calc(6 * -1 * var(--dora-h)); }
+  100% { background-position: calc(8 * -1 * var(--dora-w)) calc(6 * -1 * var(--dora-h)); }
+}
+
+@keyframes surprised {
+  0% { background-position: calc(5 * -1 * var(--dora-w)) calc(5 * -1 * var(--dora-h)); }
+  100% { background-position: calc(10 * -1 * var(--dora-w)) calc(5 * -1 * var(--dora-h)); }
+}
+
+/* Movement - trái sang phải */
+@keyframes move-l-r {
+  0% { left: -50px; }
+  100% { left: calc(100% + 50px); }
+}
+
+/* Movement - phải sang trái */
+@keyframes move-r-l {
+  0% { left: calc(100% + 50px); }
+  100% { left: -50px; }
+}
+
+@media (max-width: 768px) {
+  .dora-runner {
+    display: none;
+  }
+}

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Doraemon Full Sprites Gallery</title>
+    <style>
+      :root {
+        --w: 36px;
+        --h: 41px;
+        --zoom: 1;
+        --bg-color: #1e272e;
+        --card-bg: #2f3640;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: #dcdde1;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 20px;
+        padding: 30px;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #444;
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        border-color: #00a8ff;
+        transform: translateY(-5px);
+      }
+
+      .dora {
+        width: var(--w);
+        height: var(--h);
+        background-image: url("dora.png");
+        background-repeat: no-repeat;
+        display: block;
+        margin: 20px auto;
+        transform: scale(var(--zoom));
+        image-rendering: pixelated;
+      }
+
+      label {
+        font-size: 12px;
+        font-weight: bold;
+        color: #00a8ff;
+        text-transform: uppercase;
+      }
+
+      /* --- TRẠNG THÁI BÊN TRÁI --- */
+      .walk-left {
+        animation: anim 0.8s steps(4) infinite;
+        --row: 0;
+        --frames: 4;
+      }
+      .fly-left {
+        animation: anim 0.8s steps(4) infinite;
+        --row: 1;
+        --frames: 4;
+      }
+      .run-left {
+        animation: anim 0.5s steps(4) infinite;
+        --row: 2;
+        --frames: 4;
+      }
+      .crawl-left {
+        animation: anim 0.9s steps(3) infinite;
+        --row: 3;
+        --frames: 3;
+      }
+      .sit-left {
+        animation: anim 1.2s steps(2) infinite;
+        --row: 4;
+        --frames: 2;
+      }
+      .scared-left {
+        animation: anim 0.5s steps(4) infinite;
+        --row: 5;
+        --frames: 4;
+      }
+      .look-up-left {
+        animation: anim 0.8s steps(3) infinite;
+        --row: 6;
+        --frames: 3;
+      }
+      .back-view {
+        animation: anim 1.5s steps(3) infinite;
+        --row: 7;
+        --frames: 3;
+      }
+      .rise-up {
+        animation: anim 1s steps(5) infinite;
+        --row: 8;
+        --frames: 5;
+      }
+
+      /* --- TRẠNG THÁI BÊN PHẢI (Offset X ~ 5 units) --- */
+      .walk-right {
+        animation: anim-right 0.8s steps(3) infinite;
+        --row: 0;
+        --frames: 3;
+      }
+      .idle-right {
+        animation: anim-right 1.2s steps(2) infinite;
+        --row: 1;
+        --frames: 2;
+      }
+      .shout-right {
+        animation: anim-right 0.6s steps(3) infinite;
+        --row: 2;
+        --frames: 3;
+      }
+      .look-around {
+        animation: anim-right 1s steps(3) infinite;
+        --row: 3;
+        --frames: 3;
+      }
+      .confused {
+        animation: anim-right 0.8s steps(2) infinite;
+        --row: 4;
+        --frames: 2;
+      }
+      .surprised {
+        animation: anim-right 0.8s steps(5) infinite;
+        --row: 5;
+        --frames: 5;
+      }
+      .run-right {
+        animation: anim-right 0.6s steps(3) infinite;
+        --row: 6;
+        --frames: 3;
+      }
+
+      /* Logic Animation chung */
+      @keyframes anim {
+        from {
+          background-position: calc(0 * var(--w))
+            calc(var(--row) * -1 * var(--h));
+        }
+        to {
+          background-position: calc(var(--frames) * -1 * var(--w))
+            calc(var(--row) * -1 * var(--h));
+        }
+      }
+
+      /* Logic cho các nhóm bên phải (bắt đầu từ cột thứ 5 hoặc 6) */
+      @keyframes anim-right {
+        from {
+          background-position: calc(5 * -1 * var(--w))
+            calc(var(--row) * -1 * var(--h));
+        }
+        to {
+          background-position: calc((5 + var(--frames)) * -1 * var(--w))
+            calc(var(--row) * -1 * var(--h));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="dora walk-left"></div>
+    </div>
+    <div class="card">
+      <div class="dora fly-left"></div>
+    </div>
+    <div class="card">
+      <div class="dora run-left"></div>
+    </div>
+    <div class="card">
+      <div class="dora crawl-left"></div>
+    </div>
+    <div class="card">
+      <div class="dora sit-left"></div>
+    </div>
+    <div class="card">
+      <div class="dora scared-left"></div>
+    </div>
+    <div class="card">
+      <div class="dora look-up-left"></div>
+    </div>
+    <div class="card">
+      <div class="dora back-view"></div>
+    </div>
+    <div class="card">
+      <div class="dora rise-up"></div>
+    </div>
+
+    <div class="card">
+      <div class="dora walk-right"></div>
+    </div>
+    <div class="card">
+      <div class="dora idle-right"></div>
+    </div>
+    <div class="card">
+      <div class="dora shout-right"></div>
+    </div>
+    <div class="card">
+      <div class="dora look-around"></div>
+    </div>
+    <div class="card">
+      <div class="dora confused"></div>
+    </div>
+    <div class="card">
+      <div class="dora surprised"></div>
+    </div>
+    <div class="card">
+      <div class="dora run-right"></div>
+    </div>
+  </body>
+</html>
