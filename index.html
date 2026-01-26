@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Trong Nhan | Senior Frontend Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #22d3ee;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a2e 50%, var(--dark) 100%);
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: -1;
+            animation: glow 10s ease-in-out infinite;
+        }
+
+        .bg-glow-1 {
+            top: -200px;
+            left: -200px;
+            background: var(--primary);
+        }
+
+        .bg-glow-2 {
+            bottom: -200px;
+            right: -200px;
+            background: var(--secondary);
+            animation-delay: -5s;
+        }
+
+        @keyframes glow {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.2); opacity: 0.2; }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(99, 102, 241, 0); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero .title {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .typing-text {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            min-height: 1.5em;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .typing-text::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .hero-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .hero-info span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .hero-info a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .hero-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--dark-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+        }
+
+        .skill-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            padding: 0.3rem 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .skill-card li::before {
+            content: '▹ ';
+            color: var(--primary);
+        }
+
+        /* Proficiency Bars */
+        .proficiency {
+            margin-top: 2rem;
+        }
+
+        .proficiency-bar {
+            margin-bottom: 1rem;
+        }
+
+        .proficiency-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .proficiency-track {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .proficiency-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Experience Section */
+        .experience-item {
+            background: var(--dark-light);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+        }
+
+        .experience-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-company {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .experience-role {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        .experience-period {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .experience-projects {
+            margin-top: 1rem;
+        }
+
+        .project {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+        }
+
+        .project-name {
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .project-tech {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Education Section */
+        .education-card {
+            background: var(--dark-light);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .education-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card p {
+            color: var(--text-muted);
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .title {
+                font-size: 1.2rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-gradient"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-animation" id="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">LN</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <div class="avatar">LN</div>
+            <h1>Le Trong Nhan</h1>
+            <p class="title">Senior Frontend Developer</p>
+            <p class="typing-text" id="typing"></p>
+            <div class="hero-info">
+                <span>📍 District 12, Ho Chi Minh City</span>
+                <span>📞 09451 35453</span>
+                <span>✉️ <a href="mailto:nhanle.jh1987@gmail.com">nhanle.jh1987@gmail.com</a></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title fade-in">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card fade-in">
+                <h3>Languages</h3>
+                <ul>
+                    <li>JavaScript / TypeScript</li>
+                    <li>Node.js</li>
+                    <li>HTML / CSS</li>
+                    <li>PHP</li>
+                </ul>
+            </div>
+            <div class="skill-card fade-in">
+                <h3>Frontend</h3>
+                <ul>
+                    <li>React / Next.js</li>
+                    <li>Angular / AngularJS</li>
+                    <li>jQuery</li>
+                </ul>
+            </div>
+            <div class="skill-card fade-in">
+                <h3>Backend</h3>
+                <ul>
+                    <li>NestJS</li>
+                    <li>Express.js</li>
+                    <li>Yii2 (headless)</li>
+                </ul>
+            </div>
+            <div class="skill-card fade-in">
+                <h3>Database & Tools</h3>
+                <ul>
+                    <li>PostgreSQL, MySQL, SQL Server</li>
+                    <li>Git, SVN</li>
+                    <li>Jira, Redmine</li>
+                    <li>Puppeteer / Playwright</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="proficiency fade-in">
+            <div class="proficiency-bar">
+                <div class="proficiency-label">
+                    <span>ReactJS</span>
+                    <span>6+ years (Advanced)</span>
+                </div>
+                <div class="proficiency-track">
+                    <div class="proficiency-fill" data-width="90"></div>
+                </div>
+            </div>
+            <div class="proficiency-bar">
+                <div class="proficiency-label">
+                    <span>NodeJS / NestJS</span>
+                    <span>4-6 years (Intermediate)</span>
+                </div>
+                <div class="proficiency-track">
+                    <div class="proficiency-fill" data-width="70"></div>
+                </div>
+            </div>
+            <div class="proficiency-bar">
+                <div class="proficiency-label">
+                    <span>Angular / AngularJS</span>
+                    <span>4+ years (Intermediate)</span>
+                </div>
+                <div class="proficiency-track">
+                    <div class="proficiency-fill" data-width="65"></div>
+                </div>
+            </div>
+            <div class="proficiency-bar">
+                <div class="proficiency-label">
+                    <span>PHP</span>
+                    <span>6+ years (Advanced)</span>
+                </div>
+                <div class="proficiency-track">
+                    <div class="proficiency-fill" data-width="85"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title fade-in">Work Experience</h2>
+
+        <div class="experience-item fade-in">
+            <div class="experience-header">
+                <div>
+                    <div class="experience-company">Blue Dragon</div>
+                    <div class="experience-role">Senior Fullstack Developer</div>
+                </div>
+                <div class="experience-period">Sep 2025 - Present</div>
+            </div>
+            <div class="experience-projects">
+                <div class="project">
+                    <div class="project-name">KPAC - Customer loyalty management system</div>
+                    <div class="project-tech">jQuery, Java 18</div>
+                </div>
+                <div class="project">
+                    <div class="project-name">Beautypay - Prescription & payment for beauty industry</div>
+                    <div class="project-tech">ReactJS, Java 18</div>
+                </div>
+                <div class="project">
+                    <div class="project-name">D###Free - F&B industry project</div>
+                    <div class="project-tech">ReactJS, Java 18</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item fade-in">
+            <div class="experience-header">
+                <div>
+                    <div class="experience-company">Freelance Developer</div>
+                </div>
+                <div class="experience-period">Apr 2024 - Aug 2025</div>
+            </div>
+            <p style="color: var(--text-muted);">Full-stack web/app projects using ReactJS, NextJS, NestJS, ExpressJS, Yii2 - API integration, performance and security optimization.</p>
+        </div>
+
+        <div class="experience-item fade-in">
+            <div class="experience-header">
+                <div>
+                    <div class="experience-company">Gearment Inc.</div>
+                    <div class="experience-role">Senior Developer (Fullstack) - Team: 7-13</div>
+                </div>
+                <div class="experience-period">Jul 2022 - Mar 2024</div>
+            </div>
+            <div class="experience-projects">
+                <div class="project">
+                    <div class="project-name">Gearment Portal App - Print-on-demand order management</div>
+                    <div class="project-tech">ReactJS, Java, PHP | Integrating: Stripe, Amazon, Shopify, Etsy, eBay, Shopbase</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item fade-in">
+            <div class="experience-header">
+                <div>
+                    <div class="experience-company">Silentium</div>
+                    <div class="experience-role">Senior Frontend Developer - Team: 10</div>
+                </div>
+                <div class="experience-period">Aug 2021 - Jul 2022</div>
+            </div>
+            <div class="experience-projects">
+                <div class="project">
+                    <div class="project-name">Gary "Old" Clinic App - Clinic management</div>
+                    <div class="project-tech">ReactJS, Golang | Medication management, e-prescription, patient records</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item fade-in">
+            <div class="experience-header">
+                <div>
+                    <div class="experience-company">NashTech</div>
+                    <div class="experience-role">Senior Frontend Developer - Team: 5-12</div>
+                </div>
+                <div class="experience-period">Oct 2017 - Aug 2021</div>
+            </div>
+            <div class="experience-projects">
+                <div class="project">
+                    <div class="project-name">THE OUT (2019-2021) - Luxury car rental by Jaguar Land Rover UK</div>
+                    <div class="project-tech">ReactJS, Python/Flask</div>
+                </div>
+                <div class="project">
+                    <div class="project-name">Open Create (2018-2019) - Course content for Open University UK</div>
+                    <div class="project-tech">Angular, .Net Core, Azure</div>
+                </div>
+                <div class="project">
+                    <div class="project-name">Cityline (2017-2018) - B2B/B2C e-ticketing system</div>
+                    <div class="project-tech">Angular, Java</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item fade-in">
+            <div class="experience-header">
+                <div>
+                    <div class="experience-company">Tiki</div>
+                    <div class="experience-role">Frontend Developer - Team: 5</div>
+                </div>
+                <div class="experience-period">Oct 2015 - Oct 2017</div>
+            </div>
+            <p style="color: var(--text-muted);">Built landing pages and web minigames for promotional campaigns.</p>
+            <div class="project-tech" style="margin-top: 0.5rem;">HTML5, CSS3, jQuery, ReactJS, Sass, Gulp</div>
+        </div>
+
+        <div class="experience-item fade-in">
+            <div class="experience-header">
+                <div>
+                    <div class="experience-company">VNG</div>
+                    <div class="experience-role">Frontend Developer - Team: 8</div>
+                </div>
+                <div class="experience-period">Oct 2011 - Oct 2015</div>
+            </div>
+            <p style="color: var(--text-muted);">Built Game Teasers, Landing Pages, and Minigames for VNG games.</p>
+            <div class="project-tech" style="margin-top: 0.5rem;">HTML/HTML5, CSS/CSS3, jQuery, Adobe Flash, Bootstrap, Less, Sass, Grunt</div>
+        </div>
+
+        <div class="experience-item fade-in">
+            <div class="experience-header">
+                <div>
+                    <div class="experience-company">Interactive JSC. & YouNet</div>
+                    <div class="experience-role">Developer</div>
+                </div>
+                <div class="experience-period">2009 - 2011</div>
+            </div>
+            <p style="color: var(--text-muted);">Corporate website development and PHPFox framework applications.</p>
+            <div class="experience-projects">
+                <div class="project">
+                    <div class="project-name">Projects: Vina Mazda (THACO), Ninh Van Bay Holiday Club, DGI Travel, Bourjois VN, PVCoal, Scribd iPaper, Social Media Importer</div>
+                    <div class="project-tech">PHP (ezPublish, PHPFox), MySQL, jQuery, Facebook/Scribd API</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <h2 class="section-title fade-in">Education</h2>
+        <div class="education-card fade-in">
+            <h3>Ho Chi Minh City University of Technology (HUTECH)</h3>
+            <p>Major: Information Technology</p>
+            <p>Graduation Year: 2009</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title fade-in">Get In Touch</h2>
+        <p class="fade-in" style="color: var(--text-muted);">I'm currently open to new opportunities and interesting projects.</p>
+        <div class="contact-links fade-in">
+            <a href="mailto:nhanle.jh1987@gmail.com" class="contact-btn">📧 Email Me</a>
+            <a href="mailto:nhan_le1987@yahoo.com" class="contact-btn">📧 Alternative Email</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Le Trong Nhan. Built with HTML, CSS & JavaScript.</p>
+    </footer>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Typing effect
+        function typeWriter() {
+            const text = "With 14+ years of experience, I combine technical expertise with UI/UX understanding to deliver sustainable value.";
+            const element = document.getElementById('typing');
+            let i = 0;
+
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, 40);
+                }
+            }
+
+            setTimeout(type, 1000);
+        }
+
+        // Scroll animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            const proficiencyBars = document.querySelectorAll('.proficiency-fill');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(el => observer.observe(el));
+
+            // Animate proficiency bars
+            const proficiencyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.dataset.width;
+                        entry.target.style.width = width + '%';
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            proficiencyBars.forEach(bar => proficiencyObserver.observe(bar));
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            typeWriter();
+            handleScrollAnimations();
+        });
+    </script>
+</body>
+</html>
